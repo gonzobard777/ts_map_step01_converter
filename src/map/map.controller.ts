@@ -40,11 +40,11 @@ export class MapController {
 
     this.geoToProj = geoStereographic().rotate([0, -90, 0]);
 
-    // 1)
+    // 1) TODO
     this.projToPixel = (point: IPoint): IPoint =>
       Matrix.apply(identityMatrix, point)
 
-    // 2)
+    // 2) TODO
     this.geoToPixel = (point: IPoint): IPoint =>
       Matrix.apply(identityMatrix, point)
 
