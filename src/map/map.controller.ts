@@ -40,11 +40,15 @@ export class MapController {
 
     this.geoToProj = geoStereographic().rotate([0, -90, 0]);
 
-    // 1) TODO
+    //
+    // TODO 1) Конвертер переносит точку со Сферы на плоскость Проекции.
+    //
     this.projToPixel = (point: IPoint): IPoint =>
       Matrix.apply(identityMatrix, point)
 
-    // 2) TODO
+    //
+    // TODO 2) Конвертер переносит точку со Сферы на плоскость Пикселей.
+    //
     this.geoToPixel = (point: IPoint): IPoint =>
       Matrix.apply(identityMatrix, point)
 
