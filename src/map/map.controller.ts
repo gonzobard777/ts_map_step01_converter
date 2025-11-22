@@ -2,7 +2,7 @@ import {Extent, identityMatrix, type IPoint, type IPointConverter, Matrix} from 
 import {cast} from '@do-while-for-each/common';
 import {geoStereographic} from 'd3-geo';
 import {drawPolygon, type IDrawPolygonOpt} from '../util/draw-polygon.ts';
-import countriesMerged from '../geojson/50m_countries_merged.json';
+import countriesGeojson from '../geojson/50m_countries_cut.json';
 import {traverseGeojson} from '../util/traverse-geojson.ts';
 import {MapConstant} from './map.constant.ts';
 
@@ -56,8 +56,12 @@ export class MapController {
   }
 
   render() {
+    const {context} = this;
+    context.fillStyle = MapConstant.waterFillColor;
+    context.fillRect(0, 0, MapConstant.sizes.width, MapConstant.sizes.height);
+
     traverseGeojson(
-      cast(countriesMerged),
+      cast(countriesGeojson),
       this.drawPolygon,
     );
   }
