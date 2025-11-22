@@ -2,7 +2,7 @@ import {Extent, identityMatrix, type IPoint, type IPointConverter, Matrix} from 
 import {cast} from '@do-while-for-each/common';
 import {geoStereographic} from 'd3-geo';
 import {drawPolygon, type IDrawPolygonOpt} from '../util/draw-polygon.ts';
-import countriesGeojson from '../geojson/50m_countries_cut.json';
+import countriesGeojson from '../geojson/50m_countries_merged.json';
 import {traverseGeojson} from '../util/traverse-geojson.ts';
 import {MapConstant} from './map.constant.ts';
 
