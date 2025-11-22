@@ -1,6 +1,6 @@
 import type {IPoint, IPointConverter} from '@do-while-for-each/math';
 
-interface IOpt {
+export interface IDrawPolygonOpt {
   strokeStyle?: string;
   fillStyle?: string;
 }
@@ -9,7 +9,7 @@ export function drawPolygon(
   points: IPoint[],
   geoToPixel: IPointConverter,
   context: CanvasRenderingContext2D,
-  opt: IOpt = {},
+  opt: IDrawPolygonOpt = {},
 ) {
   context.beginPath();
   const lastPointIndex = points.length - 1;
