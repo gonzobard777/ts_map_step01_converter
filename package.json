@@ -10,13 +10,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "18.0.x",
-    "react-dom": "18.0.x",
     "@do-while-for-each/common": "3.x.x",
     "@do-while-for-each/math": "3.x.x",
-    "@do-while-for-each/tree-cell-react": "18.0.x"
+    "@do-while-for-each/tree-cell-react": "18.0.x",
+    "d3-geo": "3.x.x",
+    "react": "18.0.x",
+    "react-dom": "18.0.x"
   },
   "devDependencies": {
+    "@types/d3-geo": "3.x.x",
     "@eslint/js": "^9.39.1",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
