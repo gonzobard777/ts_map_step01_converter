@@ -2,7 +2,7 @@ export class MapConstant {
 
   static sizes = {
     width: 800,
-    height: 500,
+    height: 800,
   };
 
   static borderColor = 'black';

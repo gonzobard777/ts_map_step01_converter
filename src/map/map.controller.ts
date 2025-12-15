@@ -1,4 +1,4 @@
-import {Extent, identityMatrix, type IPoint, type IPointConverter, Matrix} from '@do-while-for-each/math';
+import {Basis, Extent, type IPoint, type IPointConverter, Matrix, Operator} from '@do-while-for-each/math';
 import {cast} from '@do-while-for-each/common';
 import {geoStereographic} from 'd3-geo';
 import {drawPolygon, type IDrawPolygonOpt} from '../util/draw-polygon.ts';
@@ -47,15 +47,32 @@ export class MapController {
     // TODO 2) Создать конвертер для перемещения точки с плоскости Проекции -> на плоскость Пикселей.
     //   - Вызвать функцию из движка проекции: Сфера -> Проекция. Получить прямоугольник участка карты на проекции.
     //   - Использовать "Конвертер пропорций и углов", получить конвертер: Проекция -> Пиксель.
+    const basisOnProj = Basis.fromExtent(
+      this.geoToProj(this.geoExtent.origin),
+      this.geoToProj(this.geoExtent.oxEnd),
+      this.geoToProj(this.geoExtent.oyEnd),
+    );
+    const basisOnPixel = Basis.fromExtent(
+      [0, 0],
+      [MapConstant.sizes.width, 0],
+      [0, MapConstant.sizes.height],
+    );
+    const projToPixel = Operator.proportionsWithRotationConverter(
+      basisOnProj,
+      basisOnPixel,
+    );
     this.projToPixel = (point: IPoint): IPoint =>
-      Matrix.apply(identityMatrix, point)
+      Matrix.apply(projToPixel, point)
 
     //
     // TODO 3) Конвертер переносит точку со Сферы -> на плоскость Пикселей.
     //   - Переместить целевую точку со Сферы -> на плоскость Проекции.
     //   - Переместить точку с плоскости Проекции -> на плоскость Пикселей.
-    this.geoToPixel = (point: IPoint): IPoint =>
-      Matrix.apply(identityMatrix, point)
+    this.geoToPixel = (point: IPoint): IPoint => {
+      const pointOnProj = this.geoToProj(point);
+      const pointOnPixel = this.projToPixel(pointOnProj);
+      return pointOnPixel;
+    }
 
     this.render();
   }
